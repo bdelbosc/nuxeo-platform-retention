@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.ecm.platform.retention.testAutomation" version="1.0">
+
+   <extension point="chains"
+    target="org.nuxeo.ecm.core.operation.OperationServiceComponent">
+    
+    <chain id="updateLifeCycleChain">
+     <operation id="Document.SetLifeCycle">
+      	<param type="string" name="value">expr:Context.get("value")</param>
+      </operation>
+    </chain>
+    
+    <chain id="copyDocumentsInRepoChain">
+     <operation id="Document.CopyInRepository">
+      	<param type="string" name="targetRepositoryName">expr:Context.get("targetRepositoryName")</param>
+      	<param type="string" name="parentPath">expr:Context.get("parentPath")</param>
+      </operation>
+    </chain>
+    
+  </extension>
+</component>

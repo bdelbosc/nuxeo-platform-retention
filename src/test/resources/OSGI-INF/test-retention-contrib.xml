@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.ecm.platform.retention.testContrib">
+
+	<extension target="org.nuxeo.ecm.platform.retention.RetentionService"
+		point="ruleDefinition">
+		<ruleDefinition name="updateState"
+			filterPageProvider="filterByLifeCycle" filterParams="lifeCycle"
+			dispositionChain="updateLifeCycleChain" dispositionParams="lifeCycle" />
+
+		<ruleDefinition name="archive" filterPageProvider="selectByTitleAndLifeCycle"
+			filterParams="title, lifeCycle" dispositionChain="copyDocumentsInRepoChain"
+			dispositionParams="targetRepositoryName, parentPath" />
+	</extension>
+
+</component>

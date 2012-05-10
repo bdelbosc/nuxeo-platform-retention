@@ -1,0 +1,25 @@
+<component name="org.nuxeo.ecm.platform.retention.testProvider" version="1.0">
+
+ <extension target="org.nuxeo.ecm.platform.query.api.PageProviderService"
+    point="providers">
+
+    <coreQueryPageProvider name="filterByLifeCycle">
+      <pattern>
+        SELECT * FROM Document where ecm:currentLifeCycleState = ?
+      </pattern>
+      <sort column="dc:created" ascending="true" />
+      <pageSize>2</pageSize>
+    </coreQueryPageProvider>
+    
+
+    <coreQueryPageProvider name="selectByTitleAndLifeCycle">
+      <pattern>
+        SELECT * FROM Document where dc:title = ? and ecm:currentLifeCycleState = ?
+      </pattern>
+      <sort column="dc:title" ascending="true" />
+      <pageSize>5</pageSize>
+    </coreQueryPageProvider>
+
+ </extension>
+
+</component>

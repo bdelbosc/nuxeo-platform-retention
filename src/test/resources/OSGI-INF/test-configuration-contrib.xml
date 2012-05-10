@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.ecm.platform.retention.testContrib">
+
+  <extension target="org.nuxeo.ecm.platform.configuration.ConfigurationService"
+    point="configuration">
+    <configuration name="main" type="properties" file="${package.resource.dir}/test.properties" />
+  </extension>
+
+</component>

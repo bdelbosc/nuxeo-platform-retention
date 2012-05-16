@@ -88,4 +88,34 @@ public class RetentionServiceImpl extends DefaultComponent implements
         return ruleDefinitions.get(name);
     }
 
+    @Override
+    public Rule createRule(Rule rule) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Rule getRule(String id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Rule updateRule(Rule rule) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Rule deleteRule(String id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<String> listRuleIds() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

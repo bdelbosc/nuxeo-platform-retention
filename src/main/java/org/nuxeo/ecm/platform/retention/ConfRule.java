@@ -52,13 +52,13 @@ public class ConfRule implements Rule {
 
     @Override
     public void save() {
-        conf.addProperty(getPropertyName("name"), name);
-        conf.addProperty(getPropertyName("enable"), enable);
-        conf.addProperty(getPropertyName("ruleDefinition"), ruleDefinitionName);
-        conf.addProperty(getPropertyName("status"), status);
-        conf.addProperty(getPropertyName("cronLine"), cronLine);
-        conf.addProperty(getPropertyName("filterParams"), filterParams);
-        conf.addProperty(getPropertyName("dispositionParams"),
+        conf.setProperty(getPropertyName("name"), name);
+        conf.setProperty(getPropertyName("enable"), enable);
+        conf.setProperty(getPropertyName("ruleDefinition"), ruleDefinitionName);
+        conf.setProperty(getPropertyName("status"), status);
+        conf.setProperty(getPropertyName("cronLine"), cronLine);
+        conf.setProperty(getPropertyName("filterParams"), filterParams);
+        conf.setProperty(getPropertyName("dispositionParams"),
                 dispositionParams);
     }
 
@@ -108,7 +108,7 @@ public class ConfRule implements Rule {
     }
 
     @Override
-    public void setCronLine(String cronline) {
+    public void setCronLine(String cronLine) {
         this.cronLine = cronLine;
     }
 

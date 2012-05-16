@@ -2,31 +2,33 @@ package org.nuxeo.ecm.platform.retention;
 
 import java.util.List;
 
-
 public interface RetentionService {
 
     /**
      * List the RuleDefinition names
+     * 
      * @return
      */
     List<String> getRuleDefinitionNames();
-    
+
     RuleDefinitionDescriptor getRuleDefinition(String name);
-    
-    
-    // List<String> listRuleIds()
 
-    // deleteRule(String id);
+    // CRUD on Rule
 
-    // Rule saveRule(Rule rule)
+    Rule createRule(Rule rule);
 
-    // Rule getRule(String id)
+    Rule getRule(String id);
+
+    Rule updateRule(Rule rule);
+
+    Rule deleteRule(String id);
+
+    List<String> listRuleIds();
 
     // run(Rule rule);
-    
+
     // List<String> listRunningRules()
-    
+
     // cancelRule(String id)
-    
-   
+
 }

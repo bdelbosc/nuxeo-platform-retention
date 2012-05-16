@@ -1,8 +1,15 @@
 package org.nuxeo.ecm.platform.retention.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.apache.commons.configuration.AbstractConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.nuxeo.ecm.platform.configuration.ConfigurationService;
 import org.nuxeo.ecm.platform.retention.ConfRule;
 import org.nuxeo.ecm.platform.retention.Rule;
@@ -15,7 +22,7 @@ public class ConfRuleTest extends NXRuntimeTestCase {
 
     private ConfigurationService service;
 
-    @Override
+    @Before
     public void setUp() throws Exception {
         super.setUp();
         deployBundle("org.nuxeo.ecm.platform.configuration");
@@ -29,11 +36,12 @@ public class ConfRuleTest extends NXRuntimeTestCase {
         service = Framework.getService(ConfigurationService.class);
     }
 
-    @Override
+    @After
     public void tearDown() throws Exception {
         super.tearDown();
     }
 
+    @Test
     public void testPersistence() throws Exception {
         AbstractConfiguration conf = service.getConfiguration("main");
         assertNotNull(conf);
@@ -52,10 +60,12 @@ public class ConfRuleTest extends NXRuntimeTestCase {
         Rule rule2 = new ConfRule(conf);
         rule2.load("foo");
         assertEquals(rule.getStatus(), rule2.getStatus());
-        assertEquals(rule.getFilterParams().length, rule2.getFilterParams().length);
-        assertEquals(rule.getDispositionParams().length, rule2.getDispositionParams().length);
+        assertEquals(rule.getFilterParams().length,
+                rule2.getFilterParams().length);
+        assertEquals(rule.getDispositionParams().length,
+                rule2.getDispositionParams().length);
         assertTrue(rule2.isEnable());
-        
+
     }
 
 }

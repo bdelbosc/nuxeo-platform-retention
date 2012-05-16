@@ -1,7 +1,4 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.nuxeo.ecm.platform.retention.test
-Nuxeo-Component: OSGI-INF/test-automation-contrib.xml,
- OSGI-INF/test-retention-contrib.xml,
- OSGI-INF/test-retention-contrib.xml,
- OSGI-INF/test-configuration-contrib.xml
+Nuxeo-Component: OSGI-INF/test-retention-contrib.xml

@@ -15,6 +15,10 @@
 		TODO
 	</documentation>
 
+	<extension-point name="retention">
+		<object class="org.nuxeo.ecm.platform.retention.RetentionDescriptor" />
+	</extension-point>
+
 	<extension-point name="ruleDefinition">
 		<object class="org.nuxeo.ecm.platform.retention.RuleDefinitionDescriptor" />
 	</extension-point>

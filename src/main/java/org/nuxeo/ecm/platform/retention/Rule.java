@@ -2,12 +2,6 @@ package org.nuxeo.ecm.platform.retention;
 
 public interface Rule {
 
-    void load(String id);
-
-    void save();
-
-    void reload();
-
     String getRuleDefinition();
 
     String getName();

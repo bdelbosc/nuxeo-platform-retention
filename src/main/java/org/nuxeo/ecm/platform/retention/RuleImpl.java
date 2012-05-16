@@ -1,6 +1,5 @@
 package org.nuxeo.ecm.platform.retention;
 
-import org.apache.commons.configuration.AbstractConfiguration;
 
 /**
  * Rule that is persisted using the configuration service.
@@ -8,9 +7,7 @@ import org.apache.commons.configuration.AbstractConfiguration;
  * @author ben
  * 
  */
-public class ConfRule implements Rule {
-
-    protected AbstractConfiguration conf;
+public class RuleImpl implements Rule {
 
     protected String name;
 
@@ -25,44 +22,6 @@ public class ConfRule implements Rule {
     protected String[] filterParams;
 
     protected String[] dispositionParams;
-
-    public ConfRule(AbstractConfiguration conf) {
-        super();
-        this.conf = conf;
-    }
-
-    protected String getPropertyName(String propName) {
-        if ("name".equals(propName)) {
-            // keep a prefix to be able to list rule ids;
-            return "name." + name;
-        }
-        return name + "." + propName;
-    }
-
-    public void load(String name) {
-        this.name = name;
-        setEnable(conf.getBoolean(getPropertyName("enable")));
-        setCronLine(conf.getString(getPropertyName("cronLine")));
-        setDispositionParams(conf.getStringArray(getPropertyName("dispositionParams")));
-        setFilterParams(conf.getStringArray(getPropertyName("filterParams")));
-        setCronLine(conf.getString(getPropertyName("cronLine")));
-        setStatus(conf.getString(getPropertyName("status")));
-    }
-
-    public void save() {
-        conf.setProperty(getPropertyName("name"), name);
-        conf.setProperty(getPropertyName("enable"), enable);
-        conf.setProperty(getPropertyName("ruleDefinition"), ruleDefinitionName);
-        conf.setProperty(getPropertyName("status"), status);
-        conf.setProperty(getPropertyName("cronLine"), cronLine);
-        conf.setProperty(getPropertyName("filterParams"), filterParams);
-        conf.setProperty(getPropertyName("dispositionParams"),
-                dispositionParams);
-    }
-
-    public void reload() {
-        load(getName());
-    }
 
     @Override
     public String getRuleDefinition() {

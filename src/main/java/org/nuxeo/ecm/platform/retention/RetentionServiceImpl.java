@@ -35,7 +35,11 @@ public class RetentionServiceImpl extends DefaultComponent implements
         RetentionService {
     private static final Log log = LogFactory.getLog(RetentionServiceImpl.class);
 
+    public static final String RETENTION_EP = "retention";
+
     public static final String RULE_DEFINITION_EP = "ruleDefinition";
+
+    protected RetentionDescriptor config;
 
     protected static final Map<String, RuleDefinitionDescriptor> ruleDefinitions = new HashMap<String, RuleDefinitionDescriptor>();
 
@@ -45,9 +49,15 @@ public class RetentionServiceImpl extends DefaultComponent implements
     public void registerContribution(Object contribution,
             String extensionPoint, ComponentInstance contributor)
             throws Exception {
+        if (RETENTION_EP.equals(extensionPoint)
+                && contribution instanceof RetentionDescriptor) {
+            log.debug("Registering retention contribution...");
+            config = (RetentionDescriptor) contribution;
+        }
+
         if (RULE_DEFINITION_EP.equals(extensionPoint)
                 && contribution instanceof RuleDefinitionDescriptor) {
-            log.debug("Registering contribution...");
+            log.debug("Registering rule definition contribution...");
             RuleDefinitionDescriptor desc = (RuleDefinitionDescriptor) contribution;
             String name = desc.getName();
             ruleDefinitions.put(name, desc);
@@ -77,6 +87,16 @@ public class RetentionServiceImpl extends DefaultComponent implements
     }
 
     // API ---------------------------------------------------
+    protected DAO<Rule> getRuleDAO() {
+        if ("configuration".equals(config.getPersistenceType())) {
+            try {
+                return new ConfigurationDAOFactory(config.getPersistenceName()).getRuleDAO();
+            } catch (Exception e) {
+                log.error("Can not get a RuleDAO:" + config.getPersistenceName());
+            }
+        }
+        return null;
+    }
 
     @Override
     public List<String> getRuleDefinitionNames() {
@@ -90,32 +110,27 @@ public class RetentionServiceImpl extends DefaultComponent implements
 
     @Override
     public Rule createRule(Rule rule) {
-        // TODO Auto-generated method stub
-        return null;
+        return getRuleDAO().create(rule);
     }
 
     @Override
     public Rule getRule(String id) {
-        // TODO Auto-generated method stub
-        return null;
+        return getRuleDAO().find(id);
     }
 
     @Override
     public Rule updateRule(Rule rule) {
-        // TODO Auto-generated method stub
-        return null;
+        return getRuleDAO().update(rule);
     }
 
     @Override
-    public Rule deleteRule(String id) {
-        // TODO Auto-generated method stub
-        return null;
+    public void deleteRule(Rule rule) {
+        getRuleDAO().delete(rule);
     }
 
     @Override
-    public List<String> listRuleIds() {
-        // TODO Auto-generated method stub
-        return null;
+    public String[] listRuleIds() {
+        return getRuleDAO().findAll();
     }
 
 }

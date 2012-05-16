@@ -21,9 +21,9 @@ public interface RetentionService {
 
     Rule updateRule(Rule rule);
 
-    Rule deleteRule(String id);
+    void deleteRule(Rule rule);
 
-    List<String> listRuleIds();
+    String[] listRuleIds();
 
     // run(Rule rule);
 

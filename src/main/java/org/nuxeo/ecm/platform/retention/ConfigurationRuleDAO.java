@@ -33,8 +33,12 @@ public class ConfigurationRuleDAO extends DAO<Rule> {
     @Override
     public Rule find(String id) {
         Rule rule = new RuleImpl();
+        String name = conf.getString(getPropertyName(id, "name"));
+        if (name == null || name.isEmpty()) {
+            return null;
+        }
         rule.setName(id);
-        rule.setEnable(conf.getBoolean(getPropertyName(id, "enable")));
+        rule.setEnable(conf.getBoolean(getPropertyName(id, "enable"), true));
         rule.setCronLine(conf.getString(getPropertyName(id, "cronLine")));
         rule.setDispositionParams(conf.getStringArray(getPropertyName(id,
                 "dispositionParams")));
@@ -90,6 +94,9 @@ public class ConfigurationRuleDAO extends DAO<Rule> {
 
     @Override
     public void delete(Rule obj) {
+        if (obj == null) {
+            return;
+        }
         String id = obj.getName();
         conf.clearProperty(getPropertyName(id, "name"));
         conf.clearProperty(getPropertyName(id, "enable"));

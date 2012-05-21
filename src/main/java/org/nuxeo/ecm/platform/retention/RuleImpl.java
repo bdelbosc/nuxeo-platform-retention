@@ -1,5 +1,8 @@
 package org.nuxeo.ecm.platform.retention;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * Rule that is persisted using the configuration service.
@@ -86,6 +89,21 @@ public class RuleImpl implements Rule {
     @Override
     public void setDispositionParams(String[] params) {
         this.dispositionParams = params;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
 }
